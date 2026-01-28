@@ -1,0 +1,56 @@
+seed: 0
+
+device: "mps"
+
+pattern_shape: [4, 4]
+pattern_min: 0
+pattern_max: 4
+max_depth_cm: 12.0
+cell_size_cm: 4.0
+
+domain_size_m: [0.6, 0.6, 0.6]
+
+dx_m: 0.04
+courant: 0.5
+fs_hz: 20000.0
+sim_time_s: 0.002
+bandwidth_hz: 2000.0
+
+air_temp_c: 25.0
+air_pressure_hpa: 1000.0
+air_humidity: 0.5
+
+pml_thickness: 3
+pml_alpha_max: 2000.0
+pml_order: 2.0
+
+rigid_beta: 1.0e-10
+
+mic_radius_m: 0.2
+mic_count: 9
+incidence_angle_deg: 90.0
+source_distance_m: 0.16
+
+rl:
+  gamma: 0.99
+  lr: 0.001
+  epochs_per_step: 1
+  steps_per_episode: 2
+  episodes: 1
+  baseline_decay: 0.9
+  entropy_coef: 0.01
+  log_each_step: true
+  bn_momentum: 0.95
+  action_space: "multi"
+  best_pool: 4
+  agents_random_init: 1
+  agents_best_pool: 1
+
+ga:
+  population: 6
+  generations: 2
+  swap_prob: 0.2
+  mutate_prob: 0.2
+  log_each_gen: true
+
+log_dir: "runs"

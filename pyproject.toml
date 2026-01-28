@@ -1,0 +1,15 @@
+[project]
+name = "diffuser-fdtd-rl"
+version = "0.1.0"
+description = "FDTD + RL-based Schroeder diffuser optimization (paper replication)"
+requires-python = ">=3.10"
+
+dependencies = [
+  "numpy",
+  "scipy",
+  "torch",
+  "matplotlib",
+]
+
+[tool.black]
+line-length = 100

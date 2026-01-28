@@ -1,0 +1,68 @@
+# Paper-scale config (may be very slow on CPU; Apple GPU via MPS recommended)
+seed: 0
+
+device: "mps"  # "mps" or "cpu"
+
+# Diffuser geometry
+pattern_shape: [10, 10]
+pattern_min: 0
+pattern_max: 10
+max_depth_cm: 30.0
+cell_size_cm: 3.0
+
+# Simulation domain (meters)
+# Based on paper: 2.9 x 3.4 x 2.9 with PML thickness 30 cells, dx=1.1 cm
+# We derive dt from Courant; fs in paper may be approximate.
+domain_size_m: [2.9, 3.4, 2.9]
+
+dx_m: 0.011
+courant: 0.57735026919  # sqrt(1/3)
+fs_hz: 50200.0
+sim_time_s: 0.015
+bandwidth_hz: 4000.0
+
+# Medium
+air_temp_c: 25.0
+air_pressure_hpa: 1000.0
+air_humidity: 0.5
+
+# PML
+pml_thickness: 30
+pml_alpha_max: 25000.0
+pml_order: 2.0
+
+# Boundary admittance (rigid)
+rigid_beta: 1.0e-10
+
+# Measurement
+mic_radius_m: 0.95
+mic_count: 37  # semicircle samples (can be adjusted)
+incidence_angle_deg: 90.0
+source_distance_m: 2.0
+
+# RL/DPG
+rl:
+  gamma: 0.99
+  lr: 0.001
+  epochs_per_step: 10
+  steps_per_episode: 10
+  episodes: 80
+  baseline_decay: 0.9
+  entropy_coef: 0.01
+  log_each_step: true
+  bn_momentum: 0.95
+  action_space: "multi"  # each element delta in {-1,0,1}
+  best_pool: 10
+  agents_random_init: 20
+  agents_best_pool: 23
+
+# GA
+ga:
+  population: 36
+  generations: 18
+  swap_prob: 0.2
+  mutate_prob: 0.2
+  log_each_gen: true
+
+# Logging
+log_dir: "runs"
